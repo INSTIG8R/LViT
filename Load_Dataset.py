@@ -146,8 +146,8 @@ class ImageToImage2D(Dataset):
                  image_size: int = 224) -> None:
         self.dataset_path = dataset_path
         self.image_size = image_size
-        self.input_path = os.path.join(dataset_path, 'img')
-        self.output_path = os.path.join(dataset_path, 'labelcol')
+        self.input_path = os.path.join(dataset_path, 'Images')
+        self.output_path = os.path.join(dataset_path, 'Ground-truths')
         self.images_list = os.listdir(self.input_path)
         self.mask_list = os.listdir(self.output_path)
         self.one_hot_mask = one_hot_mask
@@ -166,10 +166,10 @@ class ImageToImage2D(Dataset):
 
     def __getitem__(self, idx):
 
-        image_filename = self.images_list[idx]  # MoNuSeg
-        mask_filename = image_filename[: -3] + "png"  # MoNuSeg
-        # mask_filename = self.mask_list[idx]  # Covid19
-        # image_filename = mask_filename.replace('mask_', '')  # Covid19
+        # image_filename = self.images_list[idx]  # MoNuSeg
+        # mask_filename = image_filename[: -3] + "png"  # MoNuSeg
+        mask_filename = self.mask_list[idx]  # Covid19
+        image_filename = mask_filename.replace('mask_', '')  # Covid19
         image = cv2.imread(os.path.join(self.input_path, image_filename))
         image = cv2.resize(image, (self.image_size, self.image_size))
 
@@ -181,7 +181,7 @@ class ImageToImage2D(Dataset):
 
         # correct dimensions if needed
         image, mask = correct_dims(image, mask)
-        text = self.rowtext[mask_filename]
+        text = self.rowtext[image_filename]
         text = text.split('\n')
         text_token = self.bert_embedding(text)
         text = np.array(text_token[0][1])

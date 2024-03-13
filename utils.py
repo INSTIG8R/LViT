@@ -526,7 +526,7 @@ class CosineAnnealingWarmRestarts(_LRScheduler):
 
 
 def read_text(filename):
-    df = pd.read_excel(filename)
+    df = pd.read_csv(filename)
     text = {}
     for i in df.index.values:  # Gets the index of the row number and traverses it
         count = len(df.Description[i].split())

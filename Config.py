@@ -23,18 +23,24 @@ vis_frequency = 10
 early_stopping_patience = 50
 
 pretrain = False
-task_name = 'MoNuSeg' 
-# task_name = 'Covid19'
-learning_rate = 1e-3  # MoNuSeg: 1e-3, Covid19: 3e-4
+# task_name = 'MoNuSeg' 
+task_name = 'Covid19'
+learning_rate = 3e-4  # MoNuSeg: 1e-3, Covid19: 3e-4
 batch_size = 2  # For LViT-T, 2 is better than 4
 
 model_name = 'LViT'
 # model_name = 'LViT_pretrain'
 
-train_dataset = './datasets/' + task_name + '/Train_Folder/'
-val_dataset = './datasets/' + task_name + '/Val_Folder/'
-test_dataset = './datasets/' + task_name + '/Test_Folder/'
-task_dataset = './datasets/' + task_name + '/Train_Folder/'
+# train_dataset = './datasets/' + task_name + '/Train_Folder/'
+# val_dataset = './datasets/' + task_name + '/Val_Folder/'
+# test_dataset = './datasets/' + task_name + '/Test_Folder/'
+# task_dataset = './datasets/' + task_name + '/Train_Folder/'
+
+train_dataset = '/home/sakir-w4-linux/Development/Thesis/ECCV/Codes/Datasets/Covid19/QaTa-COV19/QaTa-COV19-v2/Train Set/'
+val_dataset = '/home/sakir-w4-linux/Development/Thesis/ECCV/Codes/Datasets/Covid19/QaTa-COV19/QaTa-COV19-v2/Validation Set/'
+test_dataset = '/home/sakir-w4-linux/Development/Thesis/ECCV/Codes/Datasets/Covid19/QaTa-COV19/QaTa-COV19-v2/Test Set/'
+task_dataset = '/home/sakir-w4-linux/Development/Thesis/ECCV/Codes/Datasets/Covid19/QaTa-COV19/QaTa-COV19-v2/Train Set/'
+
 session_name = 'Test_session' + '_' + time.strftime('%m.%d_%Hh%M')
 save_path = task_name + '/' + model_name + '/' + session_name + '/'
 model_path = save_path + 'models/'
